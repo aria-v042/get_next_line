@@ -11,8 +11,36 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	// TODO
+	int		fd;
+	char	*filename;
+
+	if (ac < 2)
+	{
+		filename = "test.txt";
+		printf("No file given: reading from \"%s\" default file\n\n", filename);
+	}
+	else
+	{
+		filename = av[1];
+	}
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error opening the file");
+		exit(1);
+	}
+	printf("Reading from \"%s\"\n\n", filename);
+	if (close(fd) < 0)
+	{
+		perror("Error closing the file");
+		exit(1);
+	}
+	return (0);
 }
