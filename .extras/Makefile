@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = get_next_line
+NAME = test_gnl
 ROOT = ..
 
 CC = cc
@@ -20,12 +20,12 @@ endif
 CFLAGS = -Wall -Wextra -Werror -I$(ROOT) $(COPTS)
 CDEBUGFLAGS = -Wall -Wextra -g -I$(ROOT) $(COPTS)
 
-SRCS_DIR = $(ROOT)
+SRCS_DIR = .
 SRCS = $(shell find $(SRCS_DIR) -maxdepth 1 -name '*.c')
 OBJS = $(SRCS:.c=.o)
 
-TEST_SRC ?= $(or $(filter %.c, $(MAKECMDGOALS)), test.c)
-TEST_OUT = test
+DEBUG_SRC ?= $(or $(filter %.c, $(MAKECMDGOALS)), test.c)
+DEBUG_OUT = debug
 
 ifneq ($(filter %.c, $(MAKECMDGOALS)),)
 	%.c: ;
@@ -36,12 +36,12 @@ all: $(NAME)
 $(NAME):
 	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
-test:
-	$(CC) $(CDEBUGFLAGS) $(TEST_SRC) -o $(TEST_OUT)
+debug:
+	$(CC) $(CDEBUGFLAGS) $(DEBUG_SRC) -o $(DEBUG_OUT)
 
 clean:
-	rm -f $(ROOT)/$(NAME) $(TEST_OUT)
+	rm -f $(NAME) $(DEBUG_OUT)
 
 re: clean all
 
-.PHONY: all test clean re
+.PHONY: all debug clean re
