@@ -14,5 +14,7 @@
 
 char	*get_next_line(int fd)
 {
+	char	*next_line;
 	// TODO
+	// check for valid fd, BUFFER_SIZE and read() syscall
 }
