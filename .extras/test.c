@@ -16,11 +16,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+// NO BONUS: current testing does not use get_next_line() with multiple fd
 int	main(int ac, char **av)
 {
 	int		fd;
 	char	*filename;
+	char	*line;
+	int		line_num;
 
+	// if args are passed, use 1st as filename, otherwise use default
 	if (ac < 2)
 	{
 		filename = "test.txt";
@@ -30,13 +34,24 @@ int	main(int ac, char **av)
 	{
 		filename = av[1];
 	}
+
+	// open given file; check for errors
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error opening the file");
 		exit(1);
 	}
+
+	// inform what file is being read
 	printf("Reading from \"%s\"\n\n", filename);
+
+	// read file line-by-line; print each line
+	line_num = 0;
+	while ((line = get_next_line(fd)))
+		printf("%i: %s\n", ++line_num, line);
+
+	// close file and return; check for errors
 	if (close(fd) < 0)
 	{
 		perror("Error closing the file");
