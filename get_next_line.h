@@ -17,6 +17,12 @@
 #  define BUFFER_SIZE 32
 # endif
 
+typedef struct s_list
+{
+	char			*buffer;
+	struct s_list	*next;
+}	t_list;
+
 /* ==== CORE ===== */
 
 char	*get_next_line(int fd);
