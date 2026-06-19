@@ -15,6 +15,13 @@
 char	*get_next_line(int fd)
 {
 	char	*next_line;
+
+	// check valid fd, BUFFER_SIZE; use read() to check file is open
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+
 	// TODO
-	// check for valid fd, BUFFER_SIZE and read() syscall
+
+	// ...
+	return (next_line);
 }
