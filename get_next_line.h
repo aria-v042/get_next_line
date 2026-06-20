@@ -17,15 +17,16 @@
 #  define BUFFER_SIZE 32
 # endif
 
+/* ==== CORE ===== */
+
 typedef struct s_list
 {
 	char			*buffer;
 	struct s_list	*next;
 }	t_list;
 
-/* ==== CORE ===== */
-
 char	*get_next_line(int fd);
+void	create_list(t_list **bl_ptr, int fd);
 
 /* ==== UTILS ==== */
 
