@@ -14,14 +14,16 @@
 
 char	*get_next_line(int fd)
 {
-	char	*next_line;
+	static t_list	*buffer_list = NULL;
+	char			*next_line;
 
 	// check valid fd, BUFFER_SIZE; use read() to check file is open
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (NULL);
-
-	// TODO
-
-	// ...
+	create_list(&buffer_list, fd);
+	if (!buffer_list)
+		return (NULL);
+	next_line = get_line(buffer_list);
+	cleanup_list(&buffer_list);
 	return (next_line);
 }
