@@ -25,7 +25,7 @@ void	create_list(t_list **list_ptr, int fd)
 
 	while(!has_newline(*list_ptr))
 	{
-		buffer = malloc(BUFFER_LIST + 1);
+		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
 			return ;
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
