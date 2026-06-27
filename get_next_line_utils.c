@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/27 22:42:48 by frodrig2         ###   ########.fr       */
+/*   Created: 2026/06/27 21:10:09 by frodrig2          #+#    #+#             */
+/*   Updated: 2026/06/27 22:55:19 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-# endif
-
-/* ==== CORE ===== */
-
-typedef struct s_list
+int	lst_hasnewline(t_list *list)
 {
-	char			*buffer;
-	struct s_list	*next;
-}	t_list;
+	int		i;
+	t_list	*lastnode;
 
-char	*get_next_line(int fd);
-void	create_list(t_list **list_ptr, int fd);
-
-/* ==== UTILS ==== */
-
-int		lst_hasnewline(t_list *list);
-
-#endif
+	if (!list)
+		return (0);
+	lastnode = lst_lastnode(list);
+	if (!lastnode)
+		return (0);
+	i = 0;
+	while (lastnode->buffer[i])
+	{
+		if (lastnode->buffer[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}

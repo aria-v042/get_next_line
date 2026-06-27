@@ -6,24 +6,26 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:59:22 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/15 21:01:51 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/27 22:48:47 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // BS = 4
-// ola 123 bj
+// ola 123 bj/n
+// em
 // [o l a  \0]
 // [1 2 3  \0]
-// [b j\0 . .]
+// [b j\n e\0]
+// [m\0 . . .]
 
 void	create_list(t_list **list_ptr, int fd)
 {
 	char	*buffer;
 	int		bytes_read;
 
-	while(!has_newline(*list_ptr))
+	while(!lst_hasnewline(*list_ptr))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
