@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:59:22 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/27 22:48:47 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/27 23:52:55 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	create_list(t_list **list_ptr, int fd)
 			return ;
 		}
 		buffer[bytes_read] = '\0';
-		lst_append(list_ptr, buffer);
+		if (lst_append(list_ptr, buffer) != 0)
+			return ;
 	}
 }
 
