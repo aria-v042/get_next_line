@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/27 23:55:24 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/28 00:04:56 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 
 char	*get_next_line(int fd);
 void	read_into_list(t_list **list_ptr, int fd);
+char	*extract_line(t_list *list);
 
 /* ==== UTILS ==== */
 

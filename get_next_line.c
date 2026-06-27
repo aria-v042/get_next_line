@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:59:22 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/27 23:52:55 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/28 00:13:56 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@
 // [1 2 3  \0]
 // [b j\n e\0]
 // [m\0 . . .]
+
+char	*extract_line(t_list *list)
+{
+	size_t	len;
+	char	*line;
+
+	if (!list)
+		return (NULL);
+	len = len_to_newline(list);
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	lst_getline(list, line);
+	return (line);
+}
 
 void	read_into_list(t_list **list_ptr, int fd)
 {
@@ -54,7 +69,7 @@ char	*get_next_line(int fd)
 	read_into_list(&buffer_list, fd);
 	if (!buffer_list)
 		return (NULL);
-	next_line = get_line(buffer_list);
+	next_line = extract_line(buffer_list);
 	cleanup_list(&buffer_list);
 	return (next_line);
 }
