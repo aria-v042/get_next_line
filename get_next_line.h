@@ -26,7 +26,7 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	create_list(t_list **list_ptr, int fd);
+void	read_into_list(t_list **list_ptr, int fd);
 
 /* ==== UTILS ==== */
 

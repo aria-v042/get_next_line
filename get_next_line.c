@@ -20,7 +20,7 @@
 // [b j\n e\0]
 // [m\0 . . .]
 
-void	create_list(t_list **list_ptr, int fd)
+void	read_into_list(t_list **list_ptr, int fd)
 {
 	char	*buffer;
 	int		bytes_read;
@@ -51,7 +51,7 @@ char	*get_next_line(int fd)
 	// check valid fd, BUFFER_SIZE; use read() to check file is open
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (NULL);
-	create_list(&buffer_list, fd);
+	read_into_list(&buffer_list, fd);
 	if (!buffer_list)
 		return (NULL);
 	next_line = get_line(buffer_list);
