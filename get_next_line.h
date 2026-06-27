@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/28 00:04:56 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/28 00:21:44 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*extract_line(t_list *list);
 int		lst_hasnewline(t_list *list);
 t_list	*lst_lastnode(t_list *list);
 int		lst_append(t_list **list_ptr, char *buffer);
+size_t	len_to_newline(t_list *list);
 
 #endif

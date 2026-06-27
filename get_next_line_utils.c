@@ -6,11 +6,34 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 21:10:09 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/27 23:52:38 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/28 00:32:11 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	len_to_newline(t_list *list)
+{
+	int		i;
+	size_t	len;
+
+	if (!list)
+		return (0);
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->buffer[i])
+		{
+			++len;
+			if (list->buffer[i] == '\n')
+				return (len);
+			++i;
+		}
+		list = list->next;
+	}
+	return (len);
+}
 
 t_list	*lst_lastnode(t_list *list)
 {
