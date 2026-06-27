@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/15 20:39:52 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/06/27 22:42:48 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	create_list(t_list **bl_ptr, int fd);
+void	create_list(t_list **list_ptr, int fd);
 
 /* ==== UTILS ==== */
 
