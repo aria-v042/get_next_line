@@ -12,6 +12,15 @@
 
 #include "get_next_line.h"
 
+t_list	*lst_lastnode(t_list *list)
+{
+	if (!list)
+		return (NULL);
+	while (list->next)
+		list = list->next;
+	return (list);
+}
+
 int	lst_hasnewline(t_list *list)
 {
 	int		i;

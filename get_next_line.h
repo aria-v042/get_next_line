@@ -31,5 +31,6 @@ void	create_list(t_list **list_ptr, int fd);
 /* ==== UTILS ==== */
 
 int		lst_hasnewline(t_list *list);
+t_list	*lst_lastnode(t_list *list);
 
 #endif
