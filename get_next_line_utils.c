@@ -18,7 +18,11 @@ void	lst_copyline(t_list *list, char *line)
 	int	j;
 
 	if (!list || !line)
+	{
+		if (line)
+			free(line);
 		return ;
+	}
 	j = 0;
 	while (list)
 	{
