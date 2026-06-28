@@ -31,7 +31,7 @@ char	*extract_line(t_list *list)
 	line = malloc(len + 1);
 	if (!line)
 		return (NULL);
-	lst_getline(list, line);
+	lst_copyline(list, line);
 	return (line);
 }
 

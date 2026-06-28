@@ -12,6 +12,31 @@
 
 #include "get_next_line.h"
 
+void	lst_copyline(t_list *list, char *line)
+{
+	int	i;
+	int	j;
+
+	if (!list || !line)
+		return ;
+	j = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->buffer[i])
+		{
+			line[j] = list->buffer[i++];
+			if (line[j++] == '\n')
+			{
+				line[j] = '\0';
+				return ;
+			}
+		}
+		list = list->next;
+	}
+	line[j] = '\0';
+}
+
 size_t	len_to_newline(t_list *list)
 {
 	int		i;
