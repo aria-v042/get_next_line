@@ -40,7 +40,7 @@ void	read_into_list(t_list **list_ptr, int fd)
 	char	*buffer;
 	int		bytes_read;
 
-	while(!lst_hasnewline(*list_ptr))
+	while (!lst_hasnewline(*list_ptr))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
