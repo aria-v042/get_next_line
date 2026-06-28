@@ -12,14 +12,6 @@
 
 #include "get_next_line.h"
 
-// BS = 4
-// ola 123 bj/n
-// em
-// [o l a  \0]
-// [1 2 3  \0]
-// [b j\n e\0]
-// [m\0 . . .]
-
 char	*extract_line(t_list *list)
 {
 	size_t	len;
