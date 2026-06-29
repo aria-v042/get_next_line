@@ -12,6 +12,36 @@
 
 #include "get_next_line.h"
 
+int	trim_list(t_list **list_ptr)
+{
+	t_list	node;
+	t_list	lastnode;
+	char	*clean_buffer;
+	int		i;
+	int		j;
+
+	if (!*list_ptr)
+		return (-1);
+	lastnode = lst_lastnode(*list_ptr);
+	i = find_newline(lastnode));
+	if (i >= 0)
+	{
+		clean_buffer = malloc(BUFFER_SIZE + 1);
+		j = 0;
+		while (lastnode->buffer[++i])
+			clean_buffer[j++] = lastnode->buffer[i];
+		// TODO
+	}
+	while (*list_ptr)
+	{
+		node = (*list_ptr)->next;
+		free((*list_ptr)->buffer);
+		free(*list_ptr);
+		*list_ptr = node;
+	}
+	return (0);
+}
+
 char	*extract_line(t_list *list)
 {
 	size_t	len;
@@ -65,6 +95,6 @@ char	*get_next_line(int fd)
 	if (!buffer_list)
 		return (NULL);
 	next_line = extract_line(buffer_list);
-	cleanup_list(&buffer_list);
+	trim_list(&buffer_list);
 	return (next_line);
 }

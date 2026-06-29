@@ -28,6 +28,7 @@ typedef struct s_list
 char	*get_next_line(int fd);
 void	read_into_list(t_list **list_ptr, int fd);
 char	*extract_line(t_list *list);
+int		trim_list(t_list **list_ptr);
 
 /* ==== UTILS ==== */
 
