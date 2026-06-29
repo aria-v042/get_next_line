@@ -94,6 +94,7 @@ char	*get_next_line(int fd)
 	if (!buffer_list)
 		return (NULL);
 	next_line = extract_line(buffer_list);
-	trim_list(&buffer_list);
+	if (!trim_list(&buffer_list))
+		return (NULL);
 	return (next_line);
 }
