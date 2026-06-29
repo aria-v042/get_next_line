@@ -14,9 +14,9 @@
 
 int	trim_list(t_list **list_ptr)
 {
-	t_list	node;
-	t_list	lastnode;
-	char	*clean_buffer;
+	t_list	*node;
+	t_list	*lastnode;
+	char	*remainder_buf;
 	int		i;
 	int		j;
 
@@ -26,19 +26,18 @@ int	trim_list(t_list **list_ptr)
 	i = find_newline(lastnode));
 	if (i >= 0)
 	{
-		clean_buffer = malloc(BUFFER_SIZE + 1);
+		remainder_buf = malloc(BUFFER_SIZE + 1);
+		if (!remainder_buf)
+			return (-1);
 		j = 0;
 		while (lastnode->buffer[++i])
-			clean_buffer[j++] = lastnode->buffer[i];
-		// TODO
+			remainder_buf[j++] = lastnode->buffer[i];
 	}
-	while (*list_ptr)
-	{
-		node = (*list_ptr)->next;
-		free((*list_ptr)->buffer);
-		free(*list_ptr);
-		*list_ptr = node;
-	}
+	lst_dealloc(list_ptr);
+	if (remainder_buf)
+		lst_append(list_ptr, remainder_buf);
+	if (!*list_ptr)
+		return (-1);
 	return (0);
 }
 
