@@ -33,6 +33,7 @@ void	read_into_list(t_list **list_ptr, int fd)
 	int		bytes_read;
 
 	while (!lst_hasnewline(*list_ptr))
+	while (find_newline(lst_lastnode(*list_ptr)) < 0)
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)

@@ -31,7 +31,7 @@ char	*extract_line(t_list *list);
 
 /* ==== UTILS ==== */
 
-int		lst_hasnewline(t_list *list);
+int		has_newline(t_list *node);
 t_list	*lst_lastnode(t_list *list);
 int		lst_append(t_list **list_ptr, char *buffer);
 size_t	len_to_newline(t_list *list);

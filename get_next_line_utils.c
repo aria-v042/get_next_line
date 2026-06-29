@@ -73,24 +73,20 @@ t_list	*lst_lastnode(t_list *list)
 	return (list);
 }
 
-int	lst_hasnewline(t_list *list)
+int	find_newline(t_list *node)
 {
 	int		i;
-	t_list	*lastnode;
 
-	if (!list)
-		return (0);
-	lastnode = lst_lastnode(list);
-	if (!lastnode)
-		return (0);
+	if (!node)
+		return (-1);
 	i = 0;
-	while (lastnode->buffer[i])
+	while (node->buffer[i])
 	{
-		if (lastnode->buffer[i] == '\n')
-			return (1);
+		if (node->buffer[i] == '\n')
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	lst_append(t_list **list_ptr, char *buffer)
