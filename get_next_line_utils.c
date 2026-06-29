@@ -12,6 +12,17 @@
 
 #include "get_next_line.h"
 
+void	lst_dealloc(t_list	**list_ptr)
+{
+	while (*list_ptr)
+	{
+		node = (*list_ptr)->next;
+		free((*list_ptr)->buffer);
+		free(*list_ptr);
+		*list_ptr = node;
+	}
+}
+
 void	lst_copyline(t_list *list, char *line)
 {
 	int	i;
