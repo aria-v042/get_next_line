@@ -89,7 +89,7 @@ int	find_newline(t_list *node)
 	return (-1);
 }
 
-int	lst_append(t_list **list_ptr, char *buffer)
+t_list	*lst_append(t_list **list_ptr, char *buffer)
 {
 	t_list	*newnode;
 	t_list	*lastnode;
@@ -98,7 +98,7 @@ int	lst_append(t_list **list_ptr, char *buffer)
 	if (!newnode)
 	{
 		free(buffer);
-		return (-1);
+		return (NULL);
 	}
 	newnode->buffer = buffer;
 	newnode->next = NULL;
@@ -109,5 +109,5 @@ int	lst_append(t_list **list_ptr, char *buffer)
 		lastnode = lst_lastnode(*list_ptr);
 		lastnode->next = newnode;
 	}
-	return (0);
+	return (newnode);
 }
