@@ -12,16 +12,33 @@
 
 #include "get_next_line.h"
 
-void	lst_dealloc(t_list	**list_ptr)
+char	*get_remainder(t_list *lastnode, int newline_index)
+{
+	char	*remainder;
+	int		i;
+	int		j;
+
+	remainder = malloc(BUFFER_SIZE + 1);
+	if (!remainder)
+		return (NULL);
+	i = newline_index;
+	j = 0;
+	while (lastnode->buffer[++i])
+		remainder[j++] = lastnode->buffer[i];
+	remainder[j] = '\0';
+}
+
+void	lst_free_until(t_list **list_ptr, t_list *limit)
 {
 	t_list	*node;
-
-	while (*list_ptr)
+	
+	node = *list_ptr;
+	while (node != limit)
 	{
-		node = (*list_ptr)->next;
-		free((*list_ptr)->buffer);
-		free(*list_ptr);
-		*list_ptr = node;
+		*list_ptr = node->next;
+		free(node->buffer);
+		free(node);
+		node = *list_ptr;
 	}
 }
 
