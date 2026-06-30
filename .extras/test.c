@@ -49,7 +49,9 @@ int	main(int ac, char **av)
 	// read file line-by-line; print each line
 	line_num = 0;
 	while ((line = get_next_line(fd)))
+	{
 		printf("%i: %s\n", ++line_num, line);
+	}
 
 	// close file and return; check for errors
 	if (close(fd) < 0)

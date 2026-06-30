@@ -67,18 +67,28 @@ void	read_into_list(t_list **list_ptr, int fd)
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
+		{
+			// debug:
+			printf("Error: failed to allocate memory for buffer string");
 			return ;
+		}
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		// end of file reached or read() error
 		if (bytes_read <= 0)
 		{
+			// debug:
+			printf("Warning: end of file reached.\n");
 			free(buffer);
 			return ;
 		}
 		buffer[bytes_read] = '\0';
 		node = lst_append(list_ptr, buffer);
 		if (!node)
+		{
+			// debug:
+			printf("Error: error appending new node to the buffer list");
 			return ;
+		}
 	}
 }
 
@@ -89,12 +99,24 @@ char	*get_next_line(int fd)
 
 	// check valid fd, BUFFER_SIZE; use read() to check file is open
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+	{
+		// debug:
+		printf("Error: invalid fd, buffer size, or read() failure.");
 		return (NULL);
+	}
 	read_into_list(&buffer_list, fd);
 	if (!buffer_list)
+	{
+		// debug:
+		printf("Error: failed to create buffer list");
 		return (NULL);
+	}
 	next_line = extract_line(buffer_list);
 	if (!trim_list(&buffer_list))
+	{
+		// debug:
+		printf("Error: failed to trim the buffer list");
 		return (NULL);
+	}
 	return (next_line);
 }
