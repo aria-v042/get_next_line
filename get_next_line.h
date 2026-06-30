@@ -34,7 +34,7 @@ int		trim_list(t_list **list_ptr);
 
 /* ==== UTILS ==== */
 
-int		has_newline(t_list *node);
+int		find_newline(t_list *node);
 t_list	*lst_lastnode(t_list *list);
 t_list	*lst_append(t_list **list_ptr, char *buffer);
 size_t	len_to_newline(t_list *list);
