@@ -20,11 +20,12 @@ endif
 CFLAGS = -Wall -Wextra -Werror -I$(ROOT) $(COPTS)
 CDEBUGFLAGS = -Wall -Wextra -g -I$(ROOT) $(COPTS)
 
-SRCS_DIR = .
+SRCS_DIR = $(ROOT)
 SRCS = $(shell find $(SRCS_DIR) -maxdepth 1 -name '*.c')
-OBJS = $(SRCS:.c=.o)
 
-DEBUG_SRC ?= $(or $(filter %.c, $(MAKECMDGOALS)), test.c)
+TEST_SRC = test.c
+
+DEBUG_SRC ?= $(or $(filter %.c, $(MAKECMDGOALS)), $(TEST_SRC))
 DEBUG_OUT = debug
 
 ifneq ($(filter %.c, $(MAKECMDGOALS)),)
@@ -34,10 +35,10 @@ endif
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCS) $(TEST_SRC) -o $(NAME)
 
 debug:
-	$(CC) $(CDEBUGFLAGS) $(DEBUG_SRC) -o $(DEBUG_OUT)
+	$(CC) $(CDEBUGFLAGS) $(SRCS) $(DEBUG_SRC) -o $(DEBUG_OUT)
 
 clean:
 	rm -f $(NAME) $(DEBUG_OUT)
