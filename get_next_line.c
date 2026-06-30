@@ -14,7 +14,6 @@
 
 int	trim_list(t_list **list_ptr)
 {
-	t_list	*node;
 	t_list	*lastnode;
 	char	*remainder_buf;
 	int		i;
@@ -22,8 +21,9 @@ int	trim_list(t_list **list_ptr)
 
 	if (!*list_ptr)
 		return (-1);
+	remainder_buf = NULL;
 	lastnode = lst_lastnode(*list_ptr);
-	i = find_newline(lastnode));
+	i = find_newline(lastnode);
 	if (i >= 0)
 	{
 		remainder_buf = malloc(BUFFER_SIZE + 1);
