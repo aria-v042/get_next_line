@@ -14,6 +14,8 @@
 
 void	lst_dealloc(t_list	**list_ptr)
 {
+	t_list	*node;
+
 	while (*list_ptr)
 	{
 		node = (*list_ptr)->next;
