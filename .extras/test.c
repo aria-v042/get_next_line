@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-// NO BONUS: current testing does not use get_next_line() with multiple fd
+// NO BONUS: testing get_next_line() with a single file descriptor
 int	main(int ac, char **av)
 {
 	int		fd;
