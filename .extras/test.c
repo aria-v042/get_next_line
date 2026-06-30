@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	// if args are passed, use 1st as filename, otherwise use default
 	if (ac < 2)
 	{
-		filename = "test.txt";
+		filename = "file.txt";
 		printf("No file given: reading from \"%s\" default file\n\n", filename);
 	}
 	else
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	}
 
 	// inform what file is being read
-	printf("Reading from \"%s\"\n\n", filename);
+	printf("Reading from \"%s\"...\n\n", filename);
 
 	// read file line-by-line; print each line
 	line_num = 0;
