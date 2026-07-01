@@ -26,6 +26,7 @@ char	*get_remainder(t_list *lastnode, int newline_index)
 	while (lastnode->buffer[++i])
 		remainder[j++] = lastnode->buffer[i];
 	remainder[j] = '\0';
+	return (remainder);
 }
 
 void	lst_freeuntil(t_list **list_ptr, t_list *limit)
