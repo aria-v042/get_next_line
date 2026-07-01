@@ -42,7 +42,7 @@ t_list	*lst_lastnode(t_list *list);
 t_list	*lst_append(t_list **list_ptr, char *buffer);
 size_t	len_to_newline(t_list *list);
 void	lst_copyline(t_list *list, char *line);
-void	get_remainder(t_list *lastnode, int newline_index);
+char	*get_remainder(t_list *lastnode, int newline_index);
 void	lst_freeuntil(t_list **list_ptr, t_list *limit);
 
 #endif
