@@ -12,36 +12,6 @@
 
 #include "get_next_line.h"
 
-int	trim_list(t_list **list_ptr)
-{
-	t_list	*lastnode;
-	char	*remainder;
-	int		i;
-
-	if (!*list_ptr)
-		return (-1);
-	lastnode = lst_lastnode(*list_ptr);
-	i = find_newline(lastnode);
-	remainder = NULL;
-	if (i >= 0)
-	{
-		remainder = extract_remainder(lastnode, i);
-		if (!remainder)
-			return (-1);
-	}
-	free_other_nodes(list_ptr, lastnode);
-	free(lastnode->buffer);
-	if (remainder && remainder[0])
-		lastnode->buffer = remainder;
-	else
-	{
-		free(remainder);
-		free(lastnode);
-		*list_ptr = NULL;
-	}
-	return (0);
-}
-
 int trim_list(t_list **list_ptr)
 {
 	t_list	*lastnode;
