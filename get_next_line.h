@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/28 00:21:44 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/01 22:12:17 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ size_t	len_to_newline(t_list *list);
 void	lst_copyline(t_list *list, char *line);
 char	*get_remainder(t_list *lastnode, int newline_index);
 void	lst_freeuntil(t_list **list_ptr, t_list *limit);
+void	lst_resolvelast(t_list **list_ptr, t_list *lastnode, char *remainder);
 
 #endif

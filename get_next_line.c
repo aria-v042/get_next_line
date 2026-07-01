@@ -6,13 +6,13 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:59:22 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/28 00:13:56 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/01 22:03:48 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int trim_list(t_list **list_ptr)
+int	trim_list(t_list **list_ptr)
 {
 	t_list	*lastnode;
 	char	*remainder;
@@ -30,15 +30,7 @@ int trim_list(t_list **list_ptr)
 			return (-1);
 	}
 	lst_freeuntil(list_ptr, lastnode);
-	free(lastnode->buffer);
-	if (remainder && remainder[0])
-		lastnode->buffer = remainder;
-	else
-	{
-		free(remainder);
-		free(lastnode);
-		*list_ptr = NULL;
-	}
+	lst_resolvelast(list_ptr, lastnode, remainder);
 	return (0);
 }
 

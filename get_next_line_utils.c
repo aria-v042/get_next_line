@@ -6,11 +6,24 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 21:10:09 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/06/28 00:32:11 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/01 22:10:29 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	lst_resolvelast(t_list **list_ptr, t_list *lastnode, char *remainder)
+{
+	free(lastnode->buffer);
+	if (remainder && remainder[0])
+		lastnode->buffer = remainder;
+	else
+	{
+		free(remainder);
+		free(lastnode);
+		*list_ptr = NULL;
+	}
+}
 
 char	*get_remainder(t_list *lastnode, int newline_index)
 {
