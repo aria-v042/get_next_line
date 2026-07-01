@@ -28,10 +28,10 @@ char	*get_remainder(t_list *lastnode, int newline_index)
 	remainder[j] = '\0';
 }
 
-void	lst_free_until(t_list **list_ptr, t_list *limit)
+void	lst_freeuntil(t_list **list_ptr, t_list *limit)
 {
 	t_list	*node;
-	
+
 	node = *list_ptr;
 	while (node != limit)
 	{

@@ -29,7 +29,7 @@ int trim_list(t_list **list_ptr)
 		if (!remainder)
 			return (-1);
 	}
-	dealloc_until_limit(list_ptr, lastnode);
+	lst_freeuntil(list_ptr, lastnode);
 	free(lastnode->buffer);
 	if (remainder && remainder[0])
 		lastnode->buffer = remainder;
