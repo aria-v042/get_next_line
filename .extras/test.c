@@ -66,6 +66,7 @@ int	main(int ac, char **av)
 	while ((line = get_next_line(fd)))
 	{
 		printf("%i: %s", ++line_num, line);
+		free(line);
 	}
 
 	// close file and return; check for errors
