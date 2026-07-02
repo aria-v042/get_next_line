@@ -12,25 +12,53 @@
 
 #include "get_next_line.h"
 
+int	get_remainder(t_list *lastnode, char **remainderptr)
+{
+	char	*remainder;
+	int		i;
+	int		j;
+
+	remainder = NULL;
+	i = find_newline(lastnode);
+	if (i >= 0)
+	{
+		remainder = malloc(BUFFER_SIZE + 1);
+		if (!remainder)
+			return (-1);
+		j = 0;
+		while (lastnode->buffer[++i])
+			remainder[j++] = lastnode->buffer[i];
+		remainder[j] = '\0';
+	}
+	*remainderptr = remainder;
+	return (0);
+}
+
 int	trim_list(t_list **list_ptr)
 {
+	t_list	*node;
 	t_list	*lastnode;
 	char	*remainder;
-	int		newline_index;
 
 	if (!*list_ptr)
 		return (-1);
-	remainder = NULL;
 	lastnode = lst_lastnode(*list_ptr);
-	newline_index = find_newline(lastnode);
-	if (newline_index >= 0)
+	if ((get_remainder(lastnode, &remainder)) != 0)
+		return (-1);
+	node = *list_ptr;
+	while (node != lastnode)
 	{
-		remainder = get_remainder(lastnode, newline_index);
-		if (!remainder)
-			return (-1);
+		*list_ptr = node->next;
+		free(node->buffer);
+		free(node);
+		node = *list_ptr;
 	}
-	lst_freeuntil(list_ptr, lastnode);
-	lst_resolvelast(list_ptr, lastnode, remainder);
+	free(lastnode->buffer);
+	if (remainder && remainder[0])
+		return (lastnode->buffer = remainder, 0);
+	free(remainder);
+	free(lastnode);
+	*list_ptr = NULL;
 	return (0);
 }
 
@@ -65,8 +93,8 @@ void	read_into_list(t_list **list_ptr, int fd)
 		// end of file reached or read() error
 		if (bytes_read <= 0)
 		{
-			// debug:
-			// printf("Warning: end of file reached or read() error.\n");
+			if (bytes_read == -1)
+				trim_list(list_ptr);
 			free(buffer);
 			return ;
 		}
@@ -83,20 +111,13 @@ char	*get_next_line(int fd)
 	char			*next_line;
 
 	// check valid fd, BUFFER_SIZE; use read() to check file is open
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-	{
-		// debug:
-		// printf("Error: invalid fd, buffer size, or read() failure.");
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	read_into_list(&buffer_list, fd);
 	if (!buffer_list)
 		return (NULL);
 	next_line = extract_line(buffer_list);
-	if (trim_list(&buffer_list))
-	{
-		// debug:
-		// printf("Error: failed to trim the buffer list");
+	if (trim_list(&buffer_list) != 0)
 		return (NULL);
-	}
 	return (next_line);
 }

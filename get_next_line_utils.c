@@ -6,55 +6,11 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 21:10:09 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/07/01 22:10:29 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/02 02:49:36 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	lst_resolvelast(t_list **list_ptr, t_list *lastnode, char *remainder)
-{
-	free(lastnode->buffer);
-	if (remainder && remainder[0])
-		lastnode->buffer = remainder;
-	else
-	{
-		free(remainder);
-		free(lastnode);
-		*list_ptr = NULL;
-	}
-}
-
-char	*get_remainder(t_list *lastnode, int newline_index)
-{
-	char	*remainder;
-	int		i;
-	int		j;
-
-	remainder = malloc(BUFFER_SIZE + 1);
-	if (!remainder)
-		return (NULL);
-	i = newline_index;
-	j = 0;
-	while (lastnode->buffer[++i])
-		remainder[j++] = lastnode->buffer[i];
-	remainder[j] = '\0';
-	return (remainder);
-}
-
-void	lst_freeuntil(t_list **list_ptr, t_list *limit)
-{
-	t_list	*node;
-
-	node = *list_ptr;
-	while (node != limit)
-	{
-		*list_ptr = node->next;
-		free(node->buffer);
-		free(node);
-		node = *list_ptr;
-	}
-}
 
 void	lst_copyline(t_list *list, char *line)
 {
@@ -138,6 +94,8 @@ t_list	*lst_append(t_list **list_ptr, char *buffer)
 	t_list	*newnode;
 	t_list	*lastnode;
 
+	if (!buffer || buffer[0] == '\0')
+		return (NULL);
 	newnode = malloc(sizeof(t_list));
 	if (!newnode)
 	{
