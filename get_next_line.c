@@ -73,7 +73,8 @@ char	*extract_line(t_list *list)
 	line = malloc(len + 1);
 	if (!line)
 		return (NULL);
-	lst_copyline(list, line);
+	if (lst_copyline(list, line) != 0)
+		return (NULL);
 	return (line);
 }
 

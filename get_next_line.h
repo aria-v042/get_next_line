@@ -41,7 +41,7 @@ int		find_newline(t_list *node);
 t_list	*lst_lastnode(t_list *list);
 t_list	*lst_append(t_list **list_ptr, char *buffer);
 size_t	len_to_newline(t_list *list);
-void	lst_copyline(t_list *list, char *line);
+int		lst_copyline(t_list *list, char *line);
 int		get_remainder(t_list *lastnode, char **remainderptr);
 
 #endif

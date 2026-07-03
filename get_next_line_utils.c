@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void	lst_copyline(t_list *list, char *line)
+int	lst_copyline(t_list *list, char *line)
 {
 	int	i;
 	int	j;
@@ -21,7 +21,7 @@ void	lst_copyline(t_list *list, char *line)
 	{
 		if (line)
 			free(line);
-		return ;
+		return (-1);
 	}
 	j = 0;
 	while (list)
@@ -33,12 +33,12 @@ void	lst_copyline(t_list *list, char *line)
 			if (line[j++] == '\n')
 			{
 				line[j] = '\0';
-				return ;
+				return (0);
 			}
 		}
 		list = list->next;
 	}
-	line[j] = '\0';
+	return (line[j] = '\0', 0);
 }
 
 size_t	len_to_newline(t_list *list)
