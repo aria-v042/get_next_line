@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 21:10:09 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/07/02 02:49:36 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/04 02:15:02 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ size_t	len_to_newline(t_list *list)
 	int		i;
 	size_t	len;
 
-	if (!list)
-		return (0);
 	len = 0;
 	while (list)
 	{
@@ -80,7 +78,7 @@ t_list	*lst_append(t_list **list_ptr, char *buffer)
 	t_list	*newnode;
 	t_list	*lastnode;
 
-	if (!buffer || buffer[0] == '\0')
+	if (!buffer || *buffer == '\0')
 		return (NULL);
 	newnode = malloc(sizeof(t_list));
 	if (!newnode)
