@@ -122,9 +122,11 @@ char	*get_next_line(int fd)
 	// check valid fd, BUFFER_SIZE; use read() to check file is open
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	read_into_list(&buffer_list, fd);
-	if (!buffer_list)
+	if (read_into_list(&buffer_list, fd) != 0)
+	{
+		lst_freeuntil(&buffer_list, NULL);
 		return (NULL);
+	}
 	next_line = extract_line(buffer_list);
 	if (!next_line)
 	{
