@@ -40,7 +40,7 @@ int	trim_list(t_list **list_ptr)
 	char	*remainder;
 
 	if (!*list_ptr)
-		return (-1);
+		return (0);
 	lastnode = lst_lastnode(*list_ptr);
 	if (get_remainder(lastnode, &remainder) != 0)
 		return (-1);
