@@ -125,6 +125,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	next_line = extract_line(buffer_list);
 	if (trim_list(&buffer_list) != 0)
-		return (NULL);
+		lst_freeuntil(&buffer_list, NULL);
 	return (next_line);
 }
