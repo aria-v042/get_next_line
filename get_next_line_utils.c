@@ -12,6 +12,21 @@
 
 #include "get_next_line.h"
 
+void	lst_freeuntil(t_list **list_ptr, t_list *limit)
+{
+	t_list	*temp;
+
+	if (!*list_ptr)
+		return ;
+	while (*list_ptr && *list_ptr != limit)
+	{
+		temp = (*list_ptr)->next;
+		free((*list_ptr)->buffer);
+		free((*list_ptr));
+		(*list_ptr) = temp;
+	}
+}
+
 int	lst_copyline(t_list *list, char *line)
 {
 	int	i;
