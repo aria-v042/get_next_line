@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	if (ac < 2)
 	{
 		filename = "file.txt";
-		printf("No file given: reading from \"%s\" default file.\n\n", filename);
+		printf(ANSI_COLOR_CYAN "No file given: reading from \"" ANSI_COLOR_MAGENTA "%s" ANSI_COLOR_CYAN "\" default file.\n\n" ANSI_COLOR_RESET, filename);
 	}
 	else
 	{
@@ -59,25 +59,28 @@ int	main(int ac, char **av)
 	}
 
 	// inform what file is being read
-	printf("Reading from \"%s\":\n\n", filename);
+	printf(ANSI_COLOR_CYAN "Reading from \"" ANSI_COLOR_MAGENTA "%s" ANSI_COLOR_CYAN "\":\n\n" ANSI_COLOR_RESET, filename);
 
 	// read file line-by-line; print each line
 	line_num = 0;
 	while ((line = get_next_line(fd)))
 	{
-		printf("%i: %s", ++line_num, line);
+		printf(ANSI_COLOR_CYAN "%i: " ANSI_COLOR_RESET "%s", ++line_num, line);
 		free(line);
 	}
 
 	// close file and return; check for errors
 	if (close(fd) < 0)
 	{
+		printf("\n");
 		perror("Error closing the file");
 		exit(1);
 	}
-	
-	// inform of file closure
-	printf("\n\"%s\" file closed.\n", filename);
+	else
+	{
+		// inform of file closure
+		printf(ANSI_COLOR_CYAN "\n\"" ANSI_COLOR_MAGENTA "%s" ANSI_COLOR_CYAN "\" file closed.\n" ANSI_COLOR_RESET, filename);
+	}
 
 	return (0);
 }
