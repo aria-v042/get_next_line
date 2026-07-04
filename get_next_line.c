@@ -66,6 +66,7 @@ char	*extract_line(t_list *list)
 {
 	size_t	len;
 	char	*line;
+	int		i;
 
 	if (!list)
 		return (NULL);
@@ -73,8 +74,19 @@ char	*extract_line(t_list *list)
 	line = malloc(len + 1);
 	if (!line)
 		return (NULL);
-	if (lst_copyline(list, line) != 0)
-		return (NULL);
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->buffer[i])
+		{
+			line[len] = list->buffer[i++];
+			if (line[len++] == '\n')
+				return (line[len] = '\0', line);
+		}
+		list = list->next;
+	}
+	line[len] = '\0';
 	return (line);
 }
 

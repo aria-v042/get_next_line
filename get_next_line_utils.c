@@ -27,35 +27,6 @@ void	lst_freeuntil(t_list **list_ptr, t_list *limit)
 	}
 }
 
-int	lst_copyline(t_list *list, char *line)
-{
-	int	i;
-	int	j;
-
-	if (!list || !line)
-	{
-		if (line)
-			free(line);
-		return (-1);
-	}
-	j = 0;
-	while (list)
-	{
-		i = 0;
-		while (list->buffer[i])
-		{
-			line[j] = list->buffer[i++];
-			if (line[j++] == '\n')
-			{
-				line[j] = '\0';
-				return (0);
-			}
-		}
-		list = list->next;
-	}
-	return (line[j] = '\0', 0);
-}
-
 size_t	len_to_newline(t_list *list)
 {
 	int		i;
