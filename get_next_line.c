@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:59:22 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/07/01 22:03:48 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/04 02:34:33 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	read_into_list(t_list **list_ptr, int fd)
 		if (!buffer)
 			return (-1);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		// end of file reached or read() error
 		if (bytes_read <= 0)
 		{
 			free(buffer);
@@ -119,7 +118,6 @@ char	*get_next_line(int fd)
 	static t_list	*buffer_list = NULL;
 	char			*next_line;
 
-	// check valid fd, BUFFER_SIZE; use read() to check file is open
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read_into_list(&buffer_list, fd) != 0)

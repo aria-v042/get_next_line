@@ -6,7 +6,7 @@
 /*   By: frodrig2 <frodrig2@students.42porto.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 20:23:06 by frodrig2          #+#    #+#             */
-/*   Updated: 2026/07/01 22:12:17 by frodrig2         ###   ########.fr       */
+/*   Updated: 2026/07/04 02:08:42 by frodrig2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-// debug:
-// # include <stdio.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
