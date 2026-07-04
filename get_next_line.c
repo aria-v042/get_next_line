@@ -36,29 +36,23 @@ int	get_remainder(t_list *lastnode, char **remainderptr)
 
 int	trim_list(t_list **list_ptr)
 {
-	t_list	*node;
 	t_list	*lastnode;
 	char	*remainder;
 
 	if (!*list_ptr)
 		return (-1);
 	lastnode = lst_lastnode(*list_ptr);
-	if ((get_remainder(lastnode, &remainder)) != 0)
+	if (get_remainder(lastnode, &remainder) != 0)
 		return (-1);
-	node = *list_ptr;
-	while (node != lastnode)
+	if (!remainder || remainder[0] == '\0')
 	{
-		*list_ptr = node->next;
-		free(node->buffer);
-		free(node);
-		node = *list_ptr;
+		free(remainder);
+		lst_freeuntil(list_ptr, NULL);
+		return (0);
 	}
+	lst_freeuntil(list_ptr, lastnode);
 	free(lastnode->buffer);
-	if (remainder && remainder[0])
-		return (lastnode->buffer = remainder, 0);
-	free(remainder);
-	free(lastnode);
-	*list_ptr = NULL;
+	lastnode->buffer = remainder;
 	return (0);
 }
 
