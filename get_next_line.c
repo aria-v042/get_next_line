@@ -84,7 +84,7 @@ char	*extract_line(t_list *list)
 	return (line);
 }
 
-void	read_into_list(t_list **list_ptr, int fd)
+int	read_into_list(t_list **list_ptr, int fd)
 {
 	char	*buffer;
 	int		bytes_read;
@@ -95,21 +95,23 @@ void	read_into_list(t_list **list_ptr, int fd)
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
-			return ;
+			return (-1);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		// end of file reached or read() error
 		if (bytes_read <= 0)
 		{
-			if (bytes_read == -1)
-				trim_list(list_ptr);
 			free(buffer);
-			return ;
+			if (bytes_read == 0)
+				return (0);
+			else
+				return (-1);
 		}
 		buffer[bytes_read] = '\0';
 		node = lst_append(list_ptr, buffer);
 		if (!node)
-			return ;
+			return (-1);
 	}
+	return (0);
 }
 
 char	*get_next_line(int fd)
