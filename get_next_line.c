@@ -124,6 +124,11 @@ char	*get_next_line(int fd)
 	if (!buffer_list)
 		return (NULL);
 	next_line = extract_line(buffer_list);
+	if (!next_line)
+	{
+		lst_freeuntil(&buffer_list, NULL);
+		return (NULL);
+	}
 	if (trim_list(&buffer_list) != 0)
 		lst_freeuntil(&buffer_list, NULL);
 	return (next_line);
