@@ -12,21 +12,24 @@
 
 #include "get_next_line.h"
 
-void	lst_freeuntil(t_list **list_ptr, t_list *limit)
+// Return index of 1st newline character in node; return -1 if not found
+int	find_newline(t_list *node)
 {
-	t_list	*temp;
+	int		i;
 
-	if (!*list_ptr)
-		return ;
-	while (*list_ptr && *list_ptr != limit)
+	if (!node)
+		return (-1);
+	i = 0;
+	while (node->buffer[i])
 	{
-		temp = (*list_ptr)->next;
-		free((*list_ptr)->buffer);
-		free((*list_ptr));
-		(*list_ptr) = temp;
+		if (node->buffer[i] == '\n')
+			return (i);
+		i++;
 	}
+	return (-1);
 }
 
+/* Return total lenth until the end of a line in list */
 size_t	len_to_newline(t_list *list)
 {
 	int		i;
@@ -48,6 +51,25 @@ size_t	len_to_newline(t_list *list)
 	return (len);
 }
 
+/* ---- LINKED LIST OPERATIONS ----------------------- */
+
+// Free nodes until 'limit' node; Free all nodes if 'limit' is NULL
+void	lst_freeuntil(t_list **list_ptr, t_list *limit)
+{
+	t_list	*temp;
+
+	if (!*list_ptr)
+		return ;
+	while (*list_ptr && *list_ptr != limit)
+	{
+		temp = (*list_ptr)->next;
+		free((*list_ptr)->buffer);
+		free((*list_ptr));
+		(*list_ptr) = temp;
+	}
+}
+
+// Return list's last node
 t_list	*lst_lastnode(t_list *list)
 {
 	if (!list)
@@ -57,22 +79,7 @@ t_list	*lst_lastnode(t_list *list)
 	return (list);
 }
 
-int	find_newline(t_list *node)
-{
-	int		i;
-
-	if (!node)
-		return (-1);
-	i = 0;
-	while (node->buffer[i])
-	{
-		if (node->buffer[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
+// Append new node containing given buffer to list and return the appended node
 t_list	*lst_append(t_list **list_ptr, char *buffer)
 {
 	t_list	*newnode;

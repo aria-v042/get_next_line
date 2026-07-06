@@ -20,7 +20,7 @@
 #  define BUFFER_SIZE 32
 # endif
 
-/* ==== CORE ===== */
+/* ==== STRUCTS ===== */
 
 typedef struct s_list
 {
@@ -28,18 +28,21 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+/* ==== CORE LOOP ======= */
+
 char	*get_next_line(int fd);
 int		read_into_list(t_list **list_ptr, int fd);
 char	*extract_line(t_list *list);
 int		trim_list(t_list **list_ptr);
+int		get_remainder(t_list *lastnode, char **remainderptr);
 
-/* ==== UTILS ==== */
+/* ==== UTILS ============================================ */
 
 int		find_newline(t_list *node);
-t_list	*lst_lastnode(t_list *list);
-t_list	*lst_append(t_list **list_ptr, char *buffer);
 size_t	len_to_newline(t_list *list);
-int		get_remainder(t_list *lastnode, char **remainderptr);
+
+t_list	*lst_append(t_list **list_ptr, char *buffer);
+t_list	*lst_lastnode(t_list *list);
 void	lst_freeuntil(t_list **list_ptr, t_list *limit);
 
 #endif
