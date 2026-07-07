@@ -51,7 +51,7 @@ size_t	len_to_newline(t_list *list)
 	return (len);
 }
 
-/* ---- LINKED LIST OPERATIONS ----------------------- */
+/* ---- LINKED LIST OPERATIONS --------------------------------- */
 
 // Free nodes until 'limit' node; Free all nodes if 'limit' is NULL
 void	lst_freeuntil(t_list **list_ptr, t_list *limit)
