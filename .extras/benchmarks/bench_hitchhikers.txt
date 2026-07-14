@@ -1,0 +1,19 @@
+"hitchhikers.txt"
+
+BUFFER_SIZE=8
+112 allocs, 112 frees, 5,703 bytes allocated
+
+BUFFER_SIZE=16
+66 allocs, 66 frees, 5,328 bytes allocated
+
+BUFFER_SIZE=32
+42 allocs, 42 frees, 5,220 bytes allocated
+
+BUFFER_SIZE=64
+30 allocs, 30 frees, 5,302 bytes allocated
+
+BUFFER_SIZE=128
+24 allocs, 24 frees, 5,563 bytes allocated
+
+BUFFER_SIZE=256
+22 allocs, 22 frees, 6,058 bytes allocated

@@ -1,0 +1,44 @@
+"gnl_test_no_trail_nl.txt"
+> 2999 lines, 605,752 bytes
+> ~5% empty lines
+> ~80% typical lines (20-90 bytes)
+> ~12% long lines (90-300 bytes)
+> ~3% giant lines (2000-6000 bytes)
+
+TESTS:
+
+BUFFER_SIZE=1
+optimized: 1,217,504 allocs/frees, 11,516,313 bytes allocated
+prev. ver: 1,217,504 allocs/frees, 11,519,311 bytes allocated
+
+BUFFER_SIZE=8
+optimized: 157,438 allocs/frees, 2,516,312 bytes allocated
+prev. ver: 157,438 allocs/frees, 2,529,750 bytes allocated
+
+BUFFER_SIZE=16
+optimized: 81,720 allocs/frees, 1,885,037 bytes allocated
+prev. ver: 81,720 allocs/frees, 1,910,155 bytes allocated
+
+BUFFER_SIZE=32
+optimized: 43,860 allocs/frees, 1,586,923 bytes allocated
+prev. ver: 43,860 allocs/frees, 1,636,345 bytes allocated
+
+BUFFER_SIZE=64
+optimized: 24,930 allocs/frees, 1,472,674 bytes allocated
+prev. ver: 24,930 allocs/frees, 1,571,440 bytes allocated
+
+BUFFER_SIZE=128
+optimized: 15,466 allocs/frees, 1,486,886 bytes allocated
+prev. ver: 15,466 allocs/frees, 1,683,060 bytes allocated
+
+BUFFER_SIZE=256
+optimized: 10,734 allocs/frees, 1,639,432 bytes allocated
+prev. ver: 10,734 allocs/frees, 2,026,966 bytes allocated
+
+BUFFER_SIZE=4096
+optimized: 6,296 allocs/frees, 7,391,901 bytes allocated
+prev. ver: 6,296 allocs/frees, 13,509,499 bytes allocated
+
+BUFFER_SIZE=8192
+optimized: 6,148 allocs/frees, 13,868,651 bytes allocated
+prev. ver: 6,148 allocs/frees, 25,796,241 bytes allocated

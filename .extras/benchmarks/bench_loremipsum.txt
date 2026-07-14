@@ -1,0 +1,19 @@
+"loremipsum.txt"
+
+BUFFER_SIZE=8
+364 allocs, 364 frees, 9,667 bytes allocated
+
+BUFFER_SIZE=16
+198 allocs, 198 frees, 8,320 bytes allocated
+
+BUFFER_SIZE=32
+116 allocs, 116 frees, 7,799 bytes allocated
+
+BUFFER_SIZE=64
+74 allocs, 74 frees, 7,698 bytes allocated
+
+BUFFER_SIZE=128
+54 allocs, 54 frees, 7,976 bytes allocated
+
+BUFFER_SIZE=256
+44 allocs, 44 frees, 9,299 bytes allocated

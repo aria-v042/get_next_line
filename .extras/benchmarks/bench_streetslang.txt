@@ -1,0 +1,31 @@
+"streetslang.txt"
+> 345 lines, 24,732 bytes
+
+TESTS:
+
+BUFFER_SIZE=1
+50,156 allocs, 50,156 frees, 471,624 bytes allocated
+
+BUFFER_SIZE=8
+6,876 allocs, 6,876 frees, 104,937 bytes allocated
+
+BUFFER_SIZE=16
+3,784 allocs, 3,784 frees, 80,039 bytes allocated
+
+BUFFER_SIZE=32
+2,238 allocs, 2,238 frees, 69,694 bytes allocated
+
+BUFFER_SIZE=64
+1,466 allocs, 1,466 frees, 68,668 bytes allocated
+
+BUFFER_SIZE=128
+1,080 allocs, 1,080 frees, 77,291 bytes allocated
+
+BUFFER_SIZE=256
+886 allocs, 886 frees, 96,162 bytes allocated
+
+BUFFER_SIZE=4096
+706 allocs, 706 frees, 703,144 bytes allocated
+
+BUFFER_SIZE=8192
+700 allocs, 700 frees, 1,313,397 bytes allocated

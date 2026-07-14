@@ -1,0 +1,33 @@
+"netrunner.txt"
+
+TESTS:
+
+BUFFER_SIZE=1
+5,712 allocs, 5,712 frees, 54,795 bytes allocated
+
+BUFFER_SIZE=8
+766 allocs, 766 frees, 12,879 bytes allocated
+
+BUFFER_SIZE=16
+412 allocs, 412 frees, 9,966 bytes allocated
+
+BUFFER_SIZE=32
+236 allocs, 236 frees, 8,758 bytes allocated
+
+BUFFER_SIZE=64
+148 allocs, 148 frees, 8,650 bytes allocated
+
+BUFFER_SIZE=128
+104 allocs, 104 frees, 9,236 bytes allocated
+
+BUFFER_SIZE=256
+82 allocs, 82 frees, 11,353 bytes allocated
+
+BUFFER_SIZE=4096
+60 allocs, 60 frees, 52,167 bytes allocated
+
+BUFFER_SIZE=8192
+60 allocs, 60 frees, 60,359 bytes allocated
+
+BUFFER_SIZE=10000000
+60 allocs, 60 frees, 20,043,975 bytes allocated

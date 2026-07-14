@@ -1,0 +1,17 @@
+"read_error.txt"
+
+
+BUFFER_SIZE=16
+16 allocs, 16 frees, 4,290 bytes allocated
+
+BUFFER_SIZE=32
+14 allocs, 14 frees, 4,321 bytes allocated
+
+BUFFER_SIZE=64
+12 allocs, 12 frees, 4,360 bytes allocated
+
+BUFFER_SIZE=128
+12 allocs, 12 frees, 4,488 bytes allocated
+
+BUFFER_SIZE=256
+12 allocs, 12 frees, 4,744 bytes allocated
