@@ -1,5 +1,7 @@
 *// work in progress ...*
 
+*This project has been created as part of the 42 curriculum by frodrig2.*
+
 # get_next_line
 
 *Version: 14.3*
@@ -35,14 +37,14 @@ cc <flags> [-D BUFFER_SIZE=<definition>] <source files>
 ### Usage
 
 **IMPORTANT:** *When the value returned by `get_next_line()` is no longer
-needed, the allocated memory must be freed.*
+needed, **the allocated memory must be freed**.*
 
-Example: using `get_next_line()` to get the next line from a file
+Example: using `get_next_line()` to get the next line from the file "example.txt"
 
 ```
 fd = open("example.txt", 0_RDONLY);
 line = get_next_line(fd);
-...
+// ...
 free(line);
 ```
 
@@ -50,12 +52,21 @@ free(line);
 
 ## Design choices and technical notes
 
-### Draft
+### Buffer size
 
-The `BUFFER_SIZE` default value of *32 bytes* was chosen ... //todo
+The default `BUFFER_SIZE` value was chosen based on the following criteria:
 
-> The `BUFFER_SIZE` default value of *8192 bytes* was chosen based on the value of
-the `BUFSIZ` constant from the ***stdio.h*** library.
+- **Power of 2:** Most efficient alignment with the kernel's
+  page cache, the filesystem's block size and the pipe buffer size, which are
+  almost always powers of 2. A `BUFFER_SIZE` that aligns with those boundaries
+  avoids partial-page reads and reduces the number of underlying I/O operations
+  that the kernel has to stich together.
+
+- **Benchmarks:** 
+
+> ...
+
+### Linked list for storing read() buffers
 
 > [TODO]
 
@@ -75,4 +86,8 @@ the `BUFSIZ` constant from the ***stdio.h*** library.
 
 ### Use of AI
 
-An LLM was used as a tool for comparing the efficiency of different algorithms I had implemented for the 'trim_list()' function. However, I ended up disagreeingwith its advice, which recommended choosing practicality over optimization due to function size constraints, and ended up resolving the matter on my own.
+An LLM was used as a tool for comparing the efficiency of different algorithms I
+had implemented for the `trim_list()` function. However, I ended up
+disagreeing with its advice, which recommended choosing practicality over
+optimization due to function size constraints, and ended up resolving the matter
+on my own.
