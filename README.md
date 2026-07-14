@@ -15,7 +15,7 @@ returns the next line (including `\n`) from the given file. When there's nothing
 else to be read or if an error occurs, it returns `NULL`.
 
 `get_next_line()` utilizes the `read()` system call to read from the given file
-descriptor in fixed-sized chunks determined by the value of a `BUFFER_SIZE` macro (32
+descriptor in fixed-sized chunks determined by the value of a `BUFFER_SIZE` macro (64
 bytes by default), which can be redefined at compilation time.
 
 The bonus part of the project requires implementing the ability to alternate
@@ -54,7 +54,8 @@ free(line);
 
 ### Buffer size
 
-The default `BUFFER_SIZE` value was chosen based on the following criteria:
+The default `BUFFER_SIZE` value of 64 bytes was chosen based on the following
+criteria:
 
 - **Power of 2:** Most efficient alignment with the kernel's
   page cache, the filesystem's block size and the pipe buffer size, which are
