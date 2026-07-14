@@ -84,10 +84,19 @@ The default `BUFFER_SIZE` value was chosen based on the following criteria:
 
 > [TODO]
 
-### Use of AI
+### Use of AI (LLMs)
 
-An LLM was used as a tool for comparing the efficiency of different algorithms I
-had implemented for the `trim_list()` function. However, I ended up
-disagreeing with its advice, which recommended choosing practicality over
-optimization due to function size constraints, and ended up resolving the matter
-on my own.
+An LLM was used as an aid for comparing the efficiency of two different
+algorithms for the `trim_list()` function. However, I ended up disagreeing with
+its recommendation of choosing practicality over optimization due to function
+size constraints and ended up resolving the matter on my own.
+
+The same model was also used to generate a file with adequate characteristics
+(such as a combination of shorter and longer lines) for testing the performance
+of the algorithms in terms of memory management for benchmarking purposes.
+
+Finally, the LLM was employed to analyse the results of the benchmarks I ran and
+generate a graphic that helped me decide on an optimal default `BUFFER_SIZE`
+value.
+
+> ...
