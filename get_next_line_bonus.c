@@ -22,7 +22,10 @@ int	get_remainder(t_list *lastnode, char **remainderptr)
 	i = find_newline(lastnode);
 	if (i >= 0)
 	{
-		remainder = malloc(BUFFER_SIZE + 1);
+		j = i + 1;
+		while (lastnode->buffer[j])
+			++j;
+		remainder = malloc(j - i);
 		if (!remainder)
 			return (-1);
 		j = 0;
