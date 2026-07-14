@@ -21,7 +21,11 @@ CFLAGS = -Wall -Wextra -Werror -I$(ROOT) $(COPTS)
 CDEBUGFLAGS = -Wall -Wextra -g -I$(ROOT) $(COPTS)
 
 SRCS_DIR = $(ROOT)
-SRCS = $(shell find $(SRCS_DIR) -maxdepth 1 -name '*.c')
+SRCS = $(shell find $(SRCS_DIR) -maxdepth 1 -name '*.c' -not -name '*bonus.c')
+
+BONUS_NAME = test_gnl_bonus
+BONUS_DIR = $(ROOT)
+BONUS_SRCS = $(shell find $(BONUS_DIR) -maxdepth 1 -name '*bonus.c')
 
 TEST_SRC = test.c
 
@@ -37,12 +41,15 @@ all: $(NAME)
 $(NAME):
 	$(CC) $(CFLAGS) $(SRCS) $(TEST_SRC) -o $(NAME)
 
+bonus:
+	$(CC) $(CFLAGS) $(BONUS_SRCS) $(TEST_SRC) -o $(BONUS_NAME)
+
 debug:
 	$(CC) $(CDEBUGFLAGS) $(SRCS) $(DEBUG_SRC) -o $(DEBUG_OUT)
 
 clean:
-	rm -f $(NAME) $(DEBUG_OUT)
+	rm -f $(NAME) $(BONUS_NAME) $(DEBUG_OUT)
 
 re: clean all
 
-.PHONY: all debug clean re
+.PHONY: all bonus debug clean re
