@@ -73,6 +73,9 @@ criteria:
 
 ### Linked list for storing read() buffers
 
+The buffers from `read()` system calls are stored in nodes of a linked list
+structure. This approach minimizes the amount of memory allocation [...]
+
 > [TODO]
 
 ### Error management
