@@ -64,14 +64,12 @@ criteria:
   that the kernel has to stich together.
 
 - **Benchmarks:** Performance tests were ran in order to study what buffer sizes
-  were more memory efficient in the handling of various types of files. The
+  were more memory efficient while handling of various types of files. The
   number of allocations (and frees) decreases linearly the larger the buffer
   size is, while the total allocated memory is optimal when the buffer size is
   closest to the size of the lines in the file. After some investigation
   regarding line size averages across different types of files, I concluded that
   64 bytes was the best average value and set it as the default `BUFFER_SIZE`.
-
-> ...
 
 ### Linked list for storing read() buffers
 
