@@ -59,12 +59,12 @@ criteria:
 
 - **Power of 2:** Most efficient alignment with the kernel's
   page cache, the filesystem's block size and the pipe buffer size, which are
-  almost always powers of 2. A buffer size that aligns with those boundaries
+  almost always powers of 2. A buffer size that's divisible with those boundaries
   avoids partial-page reads and reduces the number of underlying I/O operations
-  that the kernel has to stich together.
+  that the kernel has to stitch together.
 
-- **Benchmarks:** Performance tests were ran in order to study what buffer sizes
-  were more memory efficient while handling of various types of files. The
+- **Benchmarks:** Performance tests were run in order to study what buffer sizes
+  were more memory efficient while handling various types of files. The
   number of allocations (and frees) decreases linearly the larger the buffer
   size is, while the total allocated memory is optimal when the buffer size is
   closest to the size of the lines in the file. After some investigation
@@ -74,7 +74,8 @@ criteria:
 ### Linked list for storing read() buffers
 
 The buffers from `read()` system calls are stored in nodes of a linked list
-structure. This approach minimizes the amount of memory allocation [...]
+structure. This approach minimizes the number of allocations and the amount of
+memory allocated
 
 > [TODO]
 
