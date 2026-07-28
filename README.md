@@ -57,11 +57,16 @@ free(line);
 The default `BUFFER_SIZE` value of 64 bytes was chosen based on the following
 criteria:
 
-- **Power of 2:** Most efficient alignment with the kernel's
-  page cache, the filesystem's block size and the pipe buffer size, which are
-  almost always powers of 2. A buffer size that's divisible with those boundaries
-  avoids partial-page reads and reduces the number of underlying I/O operations
-  that the kernel has to stitch together.
+- **Divisibility into page/block size:** Powers of 2 divide evenly into the
+  kernel's page size and typical filesystem block size (commonly 4096 bytes),
+  meaning buffer-sized chunks never straddle a page boundary with an awkward
+  remainder. In practice this has little measurable effect on this program's
+  performance, since the kernel's readahead logic determines actual disk I/O
+  independently of the buffer size passed to `read()` and glibc's `malloc`
+  doesn't allocate power-of-2 sizes any more efficiently than other sizes.
+  This choice is mostly one of conceptual tidiness; rather than
+  a measured performance requirement; the more consequential trade-off is
+  the one described below.
 
 - **Benchmarks:** Performance tests were run in order to study what buffer sizes
   were more memory efficient while handling various types of files. The
