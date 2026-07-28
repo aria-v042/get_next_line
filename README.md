@@ -64,17 +64,22 @@ criteria:
   performance, since the kernel's readahead logic determines actual disk I/O
   independently of the buffer size passed to `read()` and glibc's `malloc`
   doesn't allocate power-of-2 sizes any more efficiently than other sizes.
-  This choice is mostly one of conceptual tidiness; rather than
-  a measured performance requirement; the more consequential trade-off is
-  the one described below.
+  This choice is mostly one of conceptual tidiness.
 
-- **Benchmarks:** Performance tests were run in order to study what buffer sizes
-  were more memory efficient while handling various types of files. The
-  number of allocations (and frees) decreases linearly the larger the buffer
-  size is, while the total allocated memory is optimal when the buffer size is
-  closest to the size of the lines in the file. After some investigation
-  regarding line size averages across different types of files, I concluded that
-  64 bytes was the best average value and set it as the default `BUFFER_SIZE`.
+- **Memory usage:** Benchmarks were run with the help of Valgrind to study what
+  buffer sizes minimized memory usage when handling various types of files
+  (measured by total bytes allocated, not peak memory usage). A smaller
+  `BUFFER_SIZE` requires more `read()` calls and more buffer/node allocations to
+  span a single line, while a larger `BUFFER_SIZE` risks allocating chunks much
+  bigger than the actual line length, especially for files with shorter lines.
+  In summary, the number of allocations/frees decreases as buffer size
+  increases, while the total memory allocated is minimized when the buffer size
+  is closest to the actual line length in the file. After running benchmarks for
+  different types of test files, a `BUFFER_SIZE` of 64 bytes was found to sit
+  close to the point where total memory usage was lowest. Minimizing memory
+  usage was prioritized as a metric over minimizing the number of syscalls and
+  memory allocations due to the 42 subject's recommendation to read as little as
+  possible each time `get_next_line()` is called.
 
 ### Linked list for storing read() buffers
 
