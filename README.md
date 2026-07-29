@@ -83,11 +83,33 @@ criteria:
 
 ### Linked list for storing read() buffers
 
-The buffers from `read()` system calls are stored in nodes of a linked list
-structure. This approach minimizes the number of allocations and the amount of
-memory allocated
+The buffers from each `read()` syscall are stored in nodes of a linked list
+structure, which persists across calls to `get_next_line()` via a `static
+t_list *` pointer. This approach minimizes the number of allocations and the
+amount of memory allocated by never copying or merging buffer contents until a
+line is actually ready to be returned: each `read()` call's buffer is stored
+as-is in its own node (via `lst_append`), and nodes accumulate until a `\n` is
+found in one of them (checked via `find_newline`).
 
-> [TODO]
+Once a newline is found, `extract_line` walks the list exactly once, copying
+only the bytes belonging to the completed line into a single exact-sized buffer.
+Any data past the newline (belonging to the *next* line) is preserved by
+`trim_list`, which allocates a new exact-sized buffer for the remainder
+(calculated via `get_remainder`) and discards the now-fully-consumed nodes via
+`lst_freeuntil`. This means that the list holds as many nodes as `read()`
+calls were needed to reach the next newline and that no node's content is ever
+recopied more than once.
+
+#### Implementing bonus requirements
+
+The ability to handle multiple file descriptors was implemented using a `static
+t_list *` array of size `FD_MAX`, a macro set as 1024, to allow keeping multiple
+linked lists indexed directly by their respective file descriptor. Each `fd` has
+its own assigned slot in the array (`buffer_list[fd]`), so the partial read
+state for one file descriptor is never affected by reads on another. `fd` values
+are bounds-checked against `FD_MAX` before use, to avoid writing outside the
+array. By using a single static array for storing the multiple lists we also
+satisfy the bonus requirement of using only one static variable.
 
 ### Error management
 
