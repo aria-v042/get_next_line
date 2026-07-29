@@ -107,9 +107,9 @@ t_list *` array of size `FD_MAX`, a macro set as 1024, to allow keeping multiple
 linked lists indexed directly by their respective file descriptor. Each `fd` has
 its own assigned slot in the array (`buffer_list[fd]`), so the partial read
 state for one file descriptor is never affected by reads on another. `fd` values
-are bounds-checked against `FD_MAX` before use, to avoid writing outside the
-array. By using a single static array for storing the multiple lists we also
-satisfy the bonus requirement of using only one static variable.
+are bounds-checked against `FD_MAX` before use to avoid writing outside the
+array. Using a single static array for storing the multiple lists also satisfies
+the bonus requirement of using only one static variable.
 
 ### Error management
 
