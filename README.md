@@ -40,7 +40,7 @@ needed, **the allocated memory must be freed**.*
 Example: using `get_next_line()` to get the next line from the file "example.txt"
 
 ```
-fd = open("example.txt", 0_RDONLY);
+fd = open("example.txt", O_RDONLY);
 line = get_next_line(fd);
 // ...
 free(line);
