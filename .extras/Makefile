@@ -25,10 +25,6 @@ SRCS = $(shell find $(SRCS_DIR) -maxdepth 1 -name '*.c' -not -name '*bonus.c')
 
 TEST_SRC = test.c
 
-ifneq ($(filter %.c, $(MAKECMDGOALS)),)
-	%.c: ;
-endif
-
 all: $(NAME)
 
 $(NAME):
