@@ -197,7 +197,7 @@ maintains independent state.
 
 ### Learning resources
 
-- Oceano --- [get_next_line explained : develop a function that reads a file line by line](https://youtu.be/8E9siq7apUU) --- for understanding how linked lists could be used to implement a `get_next_line()` function.
+- Oceano - [get_next_line explained : develop a function that reads a file line by line](https://youtu.be/8E9siq7apUU) -- for understanding how linked lists could be used to implement a `get_next_line()` function.
 
 ### Use of AI
 
