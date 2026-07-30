@@ -113,7 +113,40 @@ the bonus requirement of using only one static variable.
 
 ### Error management
 
-> [TODO]
+#### Invalid arguments
+
+Invalid arguments -- a non-positive `BUFFER_SIZE`, `fd < 0`, and `fd >= FD_MAX`
+in the bonus -- are checked at the start of `get_next_line()` and result in
+an immediate `NULL` return.
+
+#### read() errors
+
+The function responsible for handling the `read()` syscall, `read_into_list()`,
+distinguishes between three conditions on every `read()` call:
+
+- **Data read successfully** (`bytes_read > 0`): the buffer is appended to the
+  list via `lst_append()` and reading continues if no newline has been found
+  yet.
+
+- **End of file** (`bytes_read == 0`): frees the memory allocated to the buffer
+  and returns `0` to signal a clean stop; any data already accumulated in the
+  list is still extracted by `extract_line()` as a final line (without a
+  trailing `\n`) before the list is freed.
+
+- **Read error** (`bytes_read < 0`): returns `-1`, signaling `get_next_line()`
+  to free the entire list via `lst_freeuntil` and return `NULL` to its caller;
+  no partial data is returned on a read error, since it can't be trusted to
+  represent a complete or correct line.
+
+#### Memory allocation failures
+
+`malloc()` failures are checked at every allocation site: the per-read buffer in
+`read_into_list()`, the new list node in `lst_append()`, the extracted line in
+`extract_line()`, and the remainder in `get_remainder()`. If a memory allocation
+failure is caught, an error code (`-1`) or `NULL` is returned to
+`get_next_line()`, signaling it to free the whole static list and return either
+`NULL` or, if a line has already been successfully extracted (in case of a
+`trim_list()` error), return the extracted line.
 
 ---
 
