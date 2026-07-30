@@ -150,12 +150,11 @@ failure is caught, an error code (`-1`) or `NULL` is returned to
 
 ## Testing
 
-For being able to compile and test `get_next_line()`, a small tester program
-(`test.c`)
-and a Makefile were written (available in the `.extras/` folder). The Makefile
-can be used to compile `test_gnl` with a custom `BUFFER_SIZE` by defining its
-value with `make [BUFFER_SIZE=<definition>]`. The tester uses `get_next_line()` to
-get and display each line of a given file, or `file.txt` by default.
+To compile and test `get_next_line()`, a small tester program (`test.c`) and a
+Makefile were written (available in the `.extras/` folder). The Makefile can be
+used to compile `test_gnl` with a custom `BUFFER_SIZE` by defining its value
+with `make [BUFFER_SIZE=<definition>]`. The tester uses `get_next_line()` to get
+and display each line of a given file, or `file.txt` by default.
 
 The following resources were also used:
 
@@ -177,7 +176,7 @@ The following resources were also used:
   confirm no leaks or invalid accesses occur regardless of `BUFFER_SIZE` or
   file shape.
 
-- **Performance/memory benchmarking:** a small ***bash*** shell script
+- **Performance/memory benchmarking:** a small bash shell script
   (`benchmark.sh`) was written in order to easily generate benchmarks for
   `get_next_line()` with different types of files and buffer sizes. As described
   in the **Design Choices** section, it uses Valgrind to measure the number of
