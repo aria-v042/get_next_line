@@ -1,5 +1,3 @@
-*// work in progress ...*
-
 *This project has been created as part of the 42 curriculum by frodrig2.*
 
 # get_next_line
@@ -152,29 +150,65 @@ failure is caught, an error code (`-1`) or `NULL` is returned to
 
 ## Testing
 
-> [TODO]
+For being able to compile and test `get_next_line()`, a small tester program
+(`test.c`)
+and a Makefile were written (available in the `.extras/` folder). The Makefile
+can be used to compile `test_gnl` with a custom `BUFFER_SIZE` by defining its
+value with `make [BUFFER_SIZE=<definition>]`. The tester uses `get_next_line()` to
+get and display each line of a given file, or `file.txt` by default.
+
+The following resources were also used:
+
+- **Norm compliance** was checked with
+  [norminette](https://github.com/42School/norminette).
+
+- **Additional testing** was done with the help of
+  [francinette](https://github.com/thecloudrazor/francinette), including its
+  `--strict` mode, which performs fault injection (forcing `malloc` failures) to
+  confirm that error paths free all allocated memory and don't crash or return
+  corrupted data. This was particularly useful for catching a bug where a
+  `malloc` failure partway through `trim_list` had been leaving the static list
+  in an inconsistent state (see the Design Choices section on error management
+  for how this is now handled).
+
+- **Memory correctness** was checked with Valgrind's `--leak-check=full`
+  across a range of test files (empty files, files with no trailing
+  newline, single very long lines, many short lines), to
+  confirm no leaks or invalid accesses occur regardless of `BUFFER_SIZE` or
+  file shape.
+
+- **Performance/memory benchmarking:** a small ***bash*** shell script
+  (`benchmark.sh`) was written in order to easily generate benchmarks for
+  `get_next_line()` with different types of files and buffer sizes. As described
+  in the **Design Choices** section, it uses Valgrind to measure the number of
+  alloc/free operations and total bytes allocated across a range of
+  `BUFFER_SIZE` values and test files with varying line-length distributions,
+  informing the choice of the default `BUFFER_SIZE`.
+
+Edge cases specifically tested include: empty files, files consisting of a
+single line with no trailing `\n`, files with consecutive empty lines, lines
+longer than `BUFFER_SIZE`, `BUFFER_SIZE` values of `1` and other very small
+sizes, reading from a closed or invalid file descriptor, and (for the bonus)
+reading from multiple file descriptors in alternation to confirm each
+maintains independent state.
 
 ---
 
 ## Resources
 
-### Reference material
+### Learning resources
 
-> [TODO]
+- Oceano --- [get_next_line explained : develop a function that reads a file line by line](https://youtu.be/8E9siq7apUU) --- for understanding how linked lists could be used to implement a `get_next_line()` function.
 
-### Use of AI (LLMs)
+### Use of AI
 
-An LLM was used as an aid for comparing the efficiency of two different
-algorithms for the `trim_list()` function. However, I ended up disagreeing with
-its recommendation of choosing practicality over optimization due to function
-size constraints and ended up resolving the matter on my own.
+[Claude](https://claude.ai/) was used for comparing the efficiency of two
+different algorithms I had implemented for the `trim_list()` function. However,
+I ended up disagreeing with its recommendation of choosing practicality over
+optimization due to function size constraints and ended up resolving the matter
+on my own.
 
-The same model was also used to generate a file with adequate characteristics
-(such as a combination of shorter and longer lines) for testing the performance
-of the algorithms in terms of memory management for benchmarking purposes.
-
-Finally, the LLM was employed to analyse the results of the benchmarks I ran and
-generate a graphic that helped me decide on an optimal default `BUFFER_SIZE`
-value.
-
-> ...
+The same LLM was also used to generate a file (`gnl_test.txt`) with adequate
+characteristics (such as a combination of shorter and longer lines) for testing
+the performance of the algorithms in terms of memory management for benchmarking
+purposes.
