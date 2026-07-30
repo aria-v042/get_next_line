@@ -167,8 +167,8 @@ The following resources were also used:
   confirm that error paths free all allocated memory and don't crash or return
   corrupted data. This was particularly useful for catching a bug where a
   `malloc` failure partway through `trim_list` had been leaving the static list
-  in an inconsistent state (see the Design Choices section on error management
-  for how this is now handled).
+  in an inconsistent state (see the **Design choices and technical notes**
+  section on error management for how this is now handled).
 
 - **Memory correctness** was checked with Valgrind's `--leak-check=full`
   across a range of test files (empty files, files with no trailing
@@ -179,10 +179,10 @@ The following resources were also used:
 - **Performance/memory benchmarking:** a small bash shell script
   (`benchmark.sh`) was written in order to easily generate benchmarks for
   `get_next_line()` with different types of files and buffer sizes. As described
-  in the **Design Choices** section, it uses Valgrind to measure the number of
-  alloc/free operations and total bytes allocated across a range of
-  `BUFFER_SIZE` values and test files with varying line-length distributions,
-  informing the choice of the default `BUFFER_SIZE`.
+  in the **Design choices and technical notes** section, it uses Valgrind to
+  measure the number of alloc/free operations and total bytes allocated across a
+  range of `BUFFER_SIZE` values and test files with varying line-length
+  distributions, informing the choice of the default `BUFFER_SIZE`.
 
 Edge cases specifically tested include: empty files, files consisting of a
 single line with no trailing `\n`, files with consecutive empty lines, lines
